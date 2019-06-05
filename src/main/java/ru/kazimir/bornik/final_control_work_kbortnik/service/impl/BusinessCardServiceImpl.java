@@ -44,6 +44,7 @@ public class BusinessCardServiceImpl implements BusinessCardService {
     }
 
     @Override
+    @Transactional
     public List<BusinessCardDTO> getBusinessCardsByIdUser(Long id) {
         List<BusinessCard> businessCardList = businessCardRepository.getBusinessCardsByIdUser(id);
         return businessCardList.stream().map(businessCardConverter::toDTO).collect(Collectors.toList());
