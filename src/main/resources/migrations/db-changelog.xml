@@ -1,0 +1,80 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="USER_TABLE_1" author="kazimir_bortnik@mail.ru">
+        <createTable tableName="User">
+
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <column name="surname" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="role" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="INSERT_USER_TABLE_1" author="kazimir_bortnik@mail.ru">
+        <insert tableName="User">
+            <column name="email" value="kazimir@mail.ru"/>
+            <column name="surname" value="Bortnik_ADMINISTRATOR"/>
+            <column name="password" value="$2a$12$24/cinhv/Kwi5wBzKlijt.T55RlDiLJtVIdAzSmB4drxCWKOQ4fBG"/>
+            <column name="role" value="ADMINISTRATOR"/>
+        </insert>
+        <insert tableName="User">
+            <column name="email" value="user@mail.ru"/>
+            <column name="surname" value="Bortnik_CUSTOMER_USER"/>
+            <column name="password" value="$2a$12$8bfPX.6k0VKckMpqm24al.w5qO5dSg3oiXR262D8.nogEcmnJ83Dy"/>
+            <column name="role" value="CUSTOMER_USER"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="BUSINESS_CARD_TABLE_1" author="kazimir_bortnik@mail.ru">
+        <createTable tableName="Business_card">
+
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="title" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="full_name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="working_telephone" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="deleted" type="Boolean" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT">
+                <constraints foreignKeyName="user_id" references="User(id)" nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
